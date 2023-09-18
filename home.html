@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>  
+    <div style="width: 100% ; margin: auto">
+    <h1 class="text-danger text-center">Thanh Hải Order</h1>
+    <form class="row form-control">
+
+            <div class="row col-6">
+                <label>Number Of Day</label>
+                <input type="text" class="col-12 NumOfDay  form-control" placeholder="Nhập số lượng trung bình mỗi ngày!">
+            </div>
+            <div class="row col-6">
+                <label>Bạn muốn order cho mấy ngày tới</label>
+                <input type="text" class="col-12 NumNextDay form-control" placeholder="Order cho mấy ngày!">
+            </div>
+            <div class="row col-6">
+                <label>Số lượng còn lại hôm nay</label>
+                <input type="text" class="col-12 CountDay form-control" placeholder="Nhập số lượng còn lại hôm nay!">
+            </div>
+            <div class="row col-6">
+                <label>Nhập Pars</label>
+                <input type="text" class="col-12 Pars form-control" placeholder="Nhập Pars!">
+            </div>
+        <input type="button" id="button" value="submit" class="btn btn-success">
+    </form>
+</div>
+<script>
+    const $ = document.querySelector.bind(document);
+    const $$ = document.querySelectorAll.bind(document);
+
+    $('#button').addEventListener('click',()=>{
+        const soLuongMoiNgay = parseInt($('.NumOfDay').value)
+        const songay = parseInt($('.NumNextDay').value)
+        const soConLai = parseInt($('.CountDay').value)
+        const par = parseInt($('.Pars').value)
+        var day =new Date();
+        var day1 = new Date();
+        var nextday = day.setDate(day.getDate()+songay);
+
+        const resultTong = (soLuongMoiNgay*songay)+ soConLai;//số tổng đến ngày order
+        const resultSoBanTruocNewDay = soConLai-(soLuongMoiNgay*(songay-1));//số bán trước ngày order
+        const resultSoLuongNhap = soLuongMoiNgay*songay;//Tổng số lượng dư
+
+        const soLuongCanNhap = par - resultSoBanTruocNewDay;
+        var string = `Số lượng trung bình mỗi ngày: ${soLuongMoiNgay}\n
+         Số ngày bạn muốn order: ${songay} \n
+         Ngày bắt đầu: ${day1} - Ngày kết thúc: ${day} \n
+         Số còn lại trong ngày hôm nay: ${soConLai} \n
+         Pars:  ${par} \n
+         Số còn lại đến trước ngày ${day}: ${resultSoBanTruocNewDay}\n
+         SỐ LƯỢNG CẦN NHẬP: ${soLuongCanNhap}`
+
+         alert(string);
+    })
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
